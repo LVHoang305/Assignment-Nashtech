@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 
 namespace ClassMembers
@@ -81,7 +81,7 @@ namespace ClassMembers
         
         //4
         public static (List<Member> List1, List<Member> List2, List<Member> List3)
-            GetLists(List<Member> listMembers)
+            getLists(List<Member> listMembers)
         {
             List<Member> List1 = new List<Member>();
             List<Member> List2 = new List<Member>();
@@ -107,17 +107,19 @@ namespace ClassMembers
         }
         
         //5
-        public static List<Member> GetMemberinHaNoi(List<Member> listMembers)
+        public static Member GetMemberinHaNoi(List<Member> listMembers)
         {
-            List<Member> MemberInHaNoi = new List<Member>();
+            var Member = new Member();
+            List<Member> List1 = new List<Member>();
             foreach (Member member in listMembers)
             {
                 if (member.Birthplace == "Ha Noi")
                 {
-                    MemberInHaNoi.add(member)
+                    List1.Add(member);
                 }
             }
-            return MemberInHaNoi;
+            Member= GetOldestMember(List1);
+            return Member;
         }
 
         static void Main(string[] args)
@@ -160,7 +162,7 @@ namespace ClassMembers
             Console.WriteLine();
             
             //
-            var ex4 = GetLists(classMembers);
+            var ex4 = getLists(classMembers);
             Console.WriteLine("Member born in 2000:");
             Console.WriteLine();
             Console.WriteLine("{0,-15} {1,-15} {2,-10} {3,-15} {4,-15} {5,-15} {6,-5}", "First Name", "Last Name", "Gender", "Date of birth", "Phone Number", "Birth Place", "Is Graduate");
@@ -188,12 +190,11 @@ namespace ClassMembers
 
             //
             var memberInHaNoi = GetMemberinHaNoi(classMembers);
-            var oldestmemberinHaNoi = GetOldestMemer(memberInHaNoi);
             Console.WriteLine();
-            Console.WriteLine("First member born in Ha Noi:");
+            Console.WriteLine("First member in list born in Ha Noi:");
             Console.WriteLine();
             Console.WriteLine("{0,-15} {1,-15} {2,-10} {3,-15} {4,-15} {5,-15} {6,-5}", "First Name", "Last Name", "Gender", "Date of birth", "Phone Number", "Birth Place", "Is Graduate");
-            DisplayMember(oldestmemberinHaNoi);
+            DisplayMember(memberInHaNoi);
         }
     }
 }
