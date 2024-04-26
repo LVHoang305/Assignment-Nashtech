@@ -81,7 +81,7 @@ namespace ClassMembers
         
         //4
         public static (List<Member> List1, List<Member> List2, List<Member> List3)
-            getLists(List<Member> listMembers)
+            GetLists(List<Member> listMembers)
         {
             List<Member> List1 = new List<Member>();
             List<Member> List2 = new List<Member>();
@@ -107,18 +107,17 @@ namespace ClassMembers
         }
         
         //5
-        public static Member GetMemberinHaNoi(List<Member> listMembers)
+        public static List<Member> GetMemberinHaNoi(List<Member> listMembers)
         {
-            var Member = new Member();
+            List<Member> MemberInHaNoi = new List<Member>();
             foreach (Member member in listMembers)
             {
                 if (member.Birthplace == "Ha Noi")
                 {
-                    Member = member;
-                    break;
+                    MemberInHaNoi.add(member)
                 }
             }
-            return Member;
+            return MemberInHaNoi;
         }
 
         static void Main(string[] args)
@@ -161,7 +160,7 @@ namespace ClassMembers
             Console.WriteLine();
             
             //
-            var ex4 = getLists(classMembers);
+            var ex4 = GetLists(classMembers);
             Console.WriteLine("Member born in 2000:");
             Console.WriteLine();
             Console.WriteLine("{0,-15} {1,-15} {2,-10} {3,-15} {4,-15} {5,-15} {6,-5}", "First Name", "Last Name", "Gender", "Date of birth", "Phone Number", "Birth Place", "Is Graduate");
@@ -189,11 +188,12 @@ namespace ClassMembers
 
             //
             var memberInHaNoi = GetMemberinHaNoi(classMembers);
+            var oldestmemberinHaNoi = GetOldestMemer(memberInHaNoi);
             Console.WriteLine();
-            Console.WriteLine("First member in list born in Ha Noi:");
+            Console.WriteLine("First member born in Ha Noi:");
             Console.WriteLine();
             Console.WriteLine("{0,-15} {1,-15} {2,-10} {3,-15} {4,-15} {5,-15} {6,-5}", "First Name", "Last Name", "Gender", "Date of birth", "Phone Number", "Birth Place", "Is Graduate");
-            DisplayMember(memberInHaNoi);
+            DisplayMember(oldestmemberinHaNoi);
         }
     }
 }
