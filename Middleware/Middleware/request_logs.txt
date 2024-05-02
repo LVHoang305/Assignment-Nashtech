@@ -1,0 +1,40 @@
+Schema: https, Host: localhost:7014, Path: /, QueryString: , Request Body: 
+Schema: https, Host: localhost:7014, Path: /, QueryString: , Request Body: 
+Schema: https, Host: localhost:7014, Path: /Home/Privacy, QueryString: , Request Body: 
+Schema: https, Host: localhost:7014, Path: /Home/Privacy, QueryString: , Request Body: 
+Schema: https, Host: localhost:7014, Path: /, QueryString: , Request Body: 
+Schema: https, Host: localhost:7014, Path: /, QueryString: , Request Body: 
+Schema: https, Host: localhost:7014, Path: /Home/Privacy, QueryString: , Request Body: 
+Schema: https, Host: localhost:7014, Path: /, QueryString: , Request Body: 
+Schema: https, Host: localhost:7014, Path: /Home/Privacy, QueryString: , Request Body: 
+Schema: https, Host: localhost:7014, Path: /, QueryString: , Request Body: 
+Schema: https, Host: localhost:7014, Path: /, QueryString: , Request Body: 
+Schema: https, Host: localhost:7014, Path: /, QueryString: , Request Body: 
+Schema: https, Host: localhost:7014, Path: /, QueryString: , Request Body: 
+5/2/2024 8:27:07 AM - Schema: https, Host: localhost:7014, Path: /, QueryString: , Request Body: 
+5/2/2024 8:27:22 AM - Schema: https, Host: localhost:7014, Path: /, QueryString: , Request Body: 
+5/2/2024 8:27:42 AM - Schema: https, Host: localhost:7014, Path: /, QueryString: , Request Body: 
+5/2/2024 3:27:55 PM - Schema: https, Host: localhost:7014, Path: /, QueryString: , Request Body: 
+5/2/2024 3:28:15 PM - Schema: https, Host: localhost:7014, Path: /, QueryString: , Request Body: 12345
+5/2/2024 3:28:38 PM - Schema: https, Host: localhost:7014, Path: /, QueryString: ?admin=true, Request Body: 12345
+5/2/2024 3:32:36 PM - Schema: https, Host: localhost:7014, Path: /, QueryString: ?admin=true, Request Body: ----------------------------528012940837966748895399
+Content-Disposition: form-data; name="name"
+
+lvhh
+----------------------------528012940837966748895399
+Content-Disposition: form-data; name="age"
+
+8
+----------------------------528012940837966748895399--
+
+5/2/2024 3:34:19 PM - Schema: https, Host: localhost:7014, Path: /, QueryString: ?admin=true, Request Body: {
+  "name":"LVH",
+  "age":8
+}
+5/2/2024 5:56:06 PM - Schema: https, Host: localhost:7014, Path: /, QueryString: , Request Body: 
+5/2/2024 5:56:54 PM - Schema: https, Host: localhost:7014, Path: /, QueryString: , Request Body: 
+5/2/2024 5:56:55 PM - Schema: https, Host: localhost:7014, Path: /Users, QueryString: , Request Body: 
+5/2/2024 5:58:22 PM - Schema: https, Host: localhost:7014, Path: /, QueryString: , Request Body: 
+5/2/2024 5:58:24 PM - Schema: https, Host: localhost:7014, Path: /Users, QueryString: , Request Body: 
+5/2/2024 5:58:27 PM - Schema: https, Host: localhost:7014, Path: /Users/Create, QueryString: , Request Body: 
+5/2/2024 5:58:35 PM - Schema: https, Host: localhost:7014, Path: /Users/Create, QueryString: , Request Body: Name=Hoang&Password=12345678&__RequestVerificationToken=CfDJ8Ihp0T8HHypFu_Uyv9yuXWBpkt93aBmucgliaAQe1UjmeZ3JakIBVUcMTxhnvdhP25XYQTLXSvx8GBCOySQ5bPK9m20SIkMpolEUC2A5TJW9yWXKuXOIjWkagkt_s4RpKtYysmXhEG82nGogYLFxT5w
