@@ -2,3 +2,5 @@
 Middleware/Middleware/wwwroot
 */*/bin
 */*/obj
+*/*/wwwroot
+*/.vs
