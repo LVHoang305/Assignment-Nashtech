@@ -1,0 +1,50 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@model List<ASPNETCoreMVC.WebApp.Models.Person>
+
+@{
+    ViewData["Title"] = "Male Members - ";
+}
+
+<h1>Male Members</h1>
+
+<table>
+    <thead>
+        <tr>
+            <th>First Name</th>
+            <th>|</th>
+            <th>Last Name</th>
+            <th>|</th>
+            <th>Gender</th>
+            <th>|</th>
+            <th>Date of Birth</th>
+            <th>|</th>
+            <th>Phone Number</th>
+            <th>|</th>
+            <th>Birth Place</th>
+            <th>|</th>
+            <th>Is Graduated</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var person in Model)
+        {
+            <tr>
+                <td>@person.FirstName</td>
+                <th>|</th>
+                <td>@person.LastName</td>
+                <th>|</th>
+                <td>@person.Gender</td>
+                <th>|</th>
+                <td>@person.DateOfBirth.ToShortDateString()</td>
+                <th>|</th>
+                <td>@person.PhoneNumber</td>
+                <th>|</th>
+                <td>@person.BirthPlace</td>
+                <th>|</th>
+                <td>@(person.IsGraduated ? "Yes" : "No")</td>
+            </tr>
+        }
+    </tbody>
+</table>
