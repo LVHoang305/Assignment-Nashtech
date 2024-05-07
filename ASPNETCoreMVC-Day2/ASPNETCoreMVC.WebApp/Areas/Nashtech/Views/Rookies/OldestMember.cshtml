@@ -1,0 +1,18 @@
+﻿@{ Layout = "~/Views/Shared/_Layout.cshtml"; }
+@model ASPNETCoreMVC.Models.Person
+
+@{
+    ViewData["Title"] = "Oldest Member - ";
+}
+
+<h1>Oldest Member</h1>
+
+<div>
+    <p>First Name: @Model.FirstName</p>
+    <p>Last Name: @Model.LastName</p>
+    <p>Gender: @Model.Gender</p>
+    <p>Date of Birth: @Model.DateOfBirth.ToShortDateString()</p>
+    <p>Phone Number: @Model.PhoneNumber</p>
+    <p>Birth Place: @Model.BirthPlace</p>
+    <p>Is Graduated: @(Model.IsGraduated ? "Yes" : "No")</p>
+</div>

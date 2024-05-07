@@ -1,0 +1,15 @@
+﻿@{ Layout = "~/Views/Shared/_Layout.cshtml"; }
+@model List<string>
+
+@{
+    ViewData["Title"] = "Full Name - ";
+}
+
+<h1>Full Name List</h1>
+
+<ul>
+    @foreach (var fullName in Model)
+    {
+        <li>@fullName</li>
+    }
+</ul>

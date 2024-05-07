@@ -1,0 +1,48 @@
+﻿@{ Layout = "~/Views/Shared/_Layout.cshtml"; }
+@model List<ASPNETCoreMVC.Models.Person>
+
+@{
+    ViewData["Title"] = "All Members - ";
+}
+
+<h1>List of People</h1>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Gender</th>
+            <th>Date of Birth</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var person in Model)
+        {
+            <tr>
+                <td><a asp-controller="Rookies" asp-action="PersonDetail" asp-route-id="@person.Id">@person.FirstName @person.LastName</a></td>
+                <td>@person.Gender</td>
+                <td>@person.DateOfBirth.ToShortDateString()</td>
+                <td>
+                    <a asp-route-area="Nashtech" asp-controller="Rookies" asp-action="CreateEdit" asp-route-id="@person.Id" class="btn btn-primary">Edit</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<div>
+    @if (ViewBag.HasPreviousPage)
+    {
+        <a href="@Url.Action("ListPeople", new { page = ViewBag.PreviousPage })">Previous</a>
+    }
+
+    @for (int i = 1; i <= ViewBag.TotalPages; i++)
+    {
+        <a href="@Url.Action("ListPeople", new { page = i })">@i</a>
+    }
+
+    @if (ViewBag.HasNextPage)
+    {
+        <a href="@Url.Action("ListPeople", new { page = ViewBag.NextPage })">Next</a>
+    }
+</div>

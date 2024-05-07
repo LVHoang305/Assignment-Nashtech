@@ -1,0 +1,136 @@
+﻿@{ Layout = "~/Views/Shared/_Layout.cshtml"; }
+@model ASPNETCoreMVC.Models.MembersByBirthYearViewModel
+
+@{
+    ViewData["Title"] = "Members By Birth Year - ";
+}
+
+@{
+    var year = ViewBag.Year;
+}
+
+<h1>Members By Birth Year With @year</h1>
+
+<h2>Equal</h2>
+<table>
+    <thead>
+        <tr>
+            <th>First Name</th>
+            <th>|</th>
+            <th>Last Name</th>
+            <th>|</th>
+            <th>Gender</th>
+            <th>|</th>
+            <th>Date of Birth</th>
+            <th>|</th>
+            <th>Phone Number</th>
+            <th>|</th>
+            <th>Birth Place</th>
+            <th>|</th>
+            <th>Is Graduated</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var person in Model.FilteredMembersEqual)
+        {
+            <tr>
+                <td>@person.FirstName</td>
+                <td>|</td>
+                <td>@person.LastName</td>
+                <td>|</td>
+                <td>@person.Gender</td>
+                <td>|</td>
+                <td>@person.DateOfBirth.ToShortDateString()</td>
+                <td>|</td>
+                <td>@person.PhoneNumber</td>
+                <td>|</td>
+                <td>@person.BirthPlace</td>
+                <td>|</td>
+                <td>@(person.IsGraduated ? "Yes" : "No")</td>
+            </tr>
+        }
+    </tbody>
+</table>
+<h2>-----------------------------------------------</h2>
+<h2>Greater Than</h2>
+<table>
+    <thead>
+        <tr>
+            <th>First Name</th>
+            <th>|</th>
+            <th>Last Name</th>
+            <th>|</th>
+            <th>Gender</th>
+            <th>|</th>
+            <th>Date of Birth</th>
+            <th>|</th>
+            <th>Phone Number</th>
+            <th>|</th>
+            <th>Birth Place</th>
+            <th>|</th>
+            <th>Is Graduated</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var person in Model.FilteredMembersGreaterThan)
+        {
+            <tr>
+                <td>@person.FirstName</td>
+                <td>|</td>
+                <td>@person.LastName</td>
+                <td>|</td>
+                <td>@person.Gender</td>
+                <td>|</td>
+                <td>@person.DateOfBirth.ToShortDateString()</td>
+                <td>|</td>
+                <td>@person.PhoneNumber</td>
+                <td>|</td>
+                <td>@person.BirthPlace</td>
+                <td>|</td>
+                <td>@(person.IsGraduated ? "Yes" : "No")</td>
+            </tr>
+        }
+    </tbody>
+</table>
+<h2>-----------------------------------------------</h2>
+
+<h2>Less Than</h2>
+<table>
+    <thead>
+        <tr>
+            <th>First Name</th>
+            <th>|</th>
+            <th>Last Name</th>
+            <th>|</th>
+            <th>Gender</th>
+            <th>|</th>
+            <th>Date of Birth</th>
+            <th>|</th>
+            <th>Phone Number</th>
+            <th>|</th>
+            <th>Birth Place</th>
+            <th>|</th>
+            <th>Is Graduated</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var person in Model.FilteredMembersLessThan)
+        {
+            <tr>
+                <td>@person.FirstName</td>
+                <td>|</td>
+                <td>@person.LastName</td>
+                <td>|</td>
+                <td>@person.Gender</td>
+                <td>|</td>
+                <td>@person.DateOfBirth.ToShortDateString()</td>
+                <td>|</td>
+                <td>@person.PhoneNumber</td>
+                <td>|</td>
+                <td>@person.BirthPlace</td>
+                <td>|</td>
+                <td>@(person.IsGraduated ? "Yes" : "No")</td>
+            </tr>
+        }
+    </tbody>
+</table>
