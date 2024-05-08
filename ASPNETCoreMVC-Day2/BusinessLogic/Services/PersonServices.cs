@@ -7,60 +7,141 @@ namespace ASPNETCoreMVC.Services
 {
     public class PersonService : IPersonService
     {
-        private static List<Person> _people;
+        private readonly string _filePath;
 
         public PersonService()
         {
-            _people = new List<Person>
-            {
-                new Person { Id = 1, FirstName = "Hoang", LastName = "Le Viet", Gender = "Male", DateOfBirth = new DateTime(2002, 5, 30), PhoneNumber = "1234567890", BirthPlace = "Ha Noi", IsGraduated = true },
-                new Person { Id = 2, FirstName = "Giang", LastName = "Le", Gender = "Female", DateOfBirth = new DateTime(2007, 10, 20), PhoneNumber = "9876543210", BirthPlace = "Ha Noi", IsGraduated = false },
-                new Person { Id = 3, FirstName = "Phu", LastName = "Le", Gender = "Male", DateOfBirth = new DateTime(2000, 10, 20), PhoneNumber = "9876543210", BirthPlace = "Ha Noi", IsGraduated = false },
-                new Person { Id = 4, FirstName = "Mao", LastName = "Xam", Gender = "Female", DateOfBirth = new DateTime(1997, 10, 20), PhoneNumber = "9876543210", BirthPlace = "Ha Noi", IsGraduated = false },
-                new Person { Id = 5, FirstName = "Hac", LastName = "Cau", Gender = "Male", DateOfBirth = new DateTime(1999, 10, 20), PhoneNumber = "9876543210", BirthPlace = "Ha Noi", IsGraduated = false },
-                new Person { Id = 6, FirstName = "Chau", LastName = "Minhh", Gender = "Female", DateOfBirth = new DateTime(2000, 10, 20), PhoneNumber = "9876543210", BirthPlace = "Ha Noi", IsGraduated = false },
-            };
+            _filePath = "/Users/tuanbeo/Projects/Middleware/Middleware.Model/Persons.xlsx";
         }
-        
 
         public void Create(Person person)
         {
-            person.Id = _people.Any() ? _people.Max(p => p.Id) + 1 : 1;
-            _people.Add(person);
+            ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
+
+            using (var package = new ExcelPackage(new FileInfo(_filePath)))
+            {
+                ExcelWorksheet worksheet = package.Workbook.Worksheets["Persons"];
+
+                int lastRow = worksheet.Dimension.End.Row + 1;
+
+                worksheet.Cells[lastRow, 1].Value = worksheet.Dimension.End.Row;
+                worksheet.Cells[lastRow, 2].Value = person.FirstName;
+                worksheet.Cells[lastRow, 3].Value = person.LastName;
+                worksheet.Cells[lastRow, 4].Value = person.Gender;
+                worksheet.Cells[lastRow, 5].Value = person.DateOfBirth;
+                worksheet.Cells[lastRow, 6].Value = person.PhoneNumber;
+                worksheet.Cells[lastRow, 7].Value = person.BirthPlace;
+                worksheet.Cells[lastRow, 8].Value = person.IsGraduated;
+
+                package.Save();
+            }
         }
 
         public void Update(Person person)
         {
-            var existingPerson = _people.FirstOrDefault(p => p.Id == person.Id);
-            if (existingPerson != null)
+            ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
+
+            using (var package = new ExcelPackage(new FileInfo(_filePath)))
             {
-                existingPerson.FirstName = person.FirstName;
-                existingPerson.LastName = person.LastName;
-                existingPerson.Gender = person.Gender;
-                existingPerson.DateOfBirth = person.DateOfBirth;
-                existingPerson.PhoneNumber = person.PhoneNumber;
-                existingPerson.BirthPlace = person.BirthPlace;
-                existingPerson.IsGraduated = person.IsGraduated;
+                ExcelWorksheet worksheet = package.Workbook.Worksheets["Persons"];
+
+                for (int row = 2; row <= worksheet.Dimension.End.Row; row++)
+                {
+                    if (worksheet.Cells[row, 1].Value.ToString() == person.Id.ToString())
+                    {
+                        worksheet.Cells[row, 2].Value = person.FirstName;
+                        worksheet.Cells[row, 3].Value = person.LastName;
+                        worksheet.Cells[row, 4].Value = person.Gender;
+                        worksheet.Cells[row, 5].Value = person.DateOfBirth;
+                        worksheet.Cells[row, 6].Value = person.PhoneNumber;
+                        worksheet.Cells[row, 7].Value = person.BirthPlace;
+                        worksheet.Cells[row, 8].Value = person.IsGraduated;
+                        break;
+                    }
+                }
+
+                package.Save();
             }
         }
 
         public void Delete(int id)
         {
-            var personToDelete = _people.FirstOrDefault(p => p.Id == id);
-            if (personToDelete != null)
+            ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
+
+            using (var package = new ExcelPackage(new FileInfo(_filePath)))
             {
-                _people.Remove(personToDelete);
+                ExcelWorksheet worksheet = package.Workbook.Worksheets["Persons"];
+
+                for (int row = 2; row <= worksheet.Dimension.End.Row; row++)
+                {
+                    if (worksheet.Cells[row, 1].Value.ToString() == id.ToString())
+                    {
+                        worksheet.DeleteRow(row);
+                        break;
+                    }
+                }
+
+                package.Save();
             }
         }
 
         public Person GetPersonById(int id)
         {
-            return _people.FirstOrDefault(p => p.Id == id);
+            ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
+
+            using (var package = new ExcelPackage(new FileInfo(_filePath)))
+            {
+                ExcelWorksheet worksheet = package.Workbook.Worksheets["Persons"];
+
+                for (int row = 2; row <= worksheet.Dimension.End.Row; row++)
+                {
+                    if (worksheet.Cells[row, 1].Value.ToString() == id.ToString())
+                    {
+                        return new Person
+                        {
+                            Id = Convert.ToInt32(worksheet.Cells[row, 1].Value),
+                            FirstName = worksheet.Cells[row, 2].Value.ToString(),
+                            LastName = worksheet.Cells[row, 3].Value.ToString(),
+                            Gender = worksheet.Cells[row, 4].Value.ToString(),
+                            DateOfBirth = Convert.ToDateTime(worksheet.Cells[row, 5].Value),
+                            PhoneNumber = worksheet.Cells[row, 6].Value.ToString(),
+                            BirthPlace = worksheet.Cells[row, 7].Value.ToString(),
+                            IsGraduated = Convert.ToBoolean(worksheet.Cells[row, 8].Value)
+                        };
+                    }
+                }
+            }
+
+            return null;
         }
 
         public List<Person> ListAllPeople()
         {
-            return _people;
+            var people = new List<Person>();
+
+            ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
+
+            using (var package = new ExcelPackage(new FileInfo(_filePath)))
+            {
+                ExcelWorksheet worksheet = package.Workbook.Worksheets["Persons"];
+
+                for (int row = 2; row <= worksheet.Dimension.End.Row; row++)
+                {
+                    people.Add(new Person
+                    {
+                        Id = Convert.ToInt32(worksheet.Cells[row, 1].Value),
+                        FirstName = worksheet.Cells[row, 2].Value.ToString(),
+                        LastName = worksheet.Cells[row, 3].Value.ToString(),
+                        Gender = worksheet.Cells[row, 4].Value.ToString(),
+                        DateOfBirth = Convert.ToDateTime(worksheet.Cells[row, 5].Value),
+                        PhoneNumber = worksheet.Cells[row, 6].Value.ToString(),
+                        BirthPlace = worksheet.Cells[row, 7].Value.ToString(),
+                        IsGraduated = Convert.ToBoolean(worksheet.Cells[row, 8].Value)
+                    });
+                }
+            }
+
+            return people;
         }
     }
 }
