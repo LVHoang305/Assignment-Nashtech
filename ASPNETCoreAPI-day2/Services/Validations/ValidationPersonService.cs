@@ -4,11 +4,7 @@ namespace ASPNETCoreAPI_day2.Services
 {
     public class ValidationPersonService: IValidationPersonService
     {
-        private static ValidationResult _result;
-        public ValidationPersonService() 
-        {
-            _result = new ValidationResult();   
-        }
+        private static ValidationResult _result = new ValidationResult();
         
         public ValidationResult ValidationPerson(ViewPerson person)
         {
