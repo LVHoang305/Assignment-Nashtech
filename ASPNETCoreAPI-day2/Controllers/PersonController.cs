@@ -32,7 +32,7 @@ namespace ASPNETCoreAPI_day2.Controllers
             ValidationResult validationResult = _validationPersonService.ValidationPerson(person);
             if (!validationResult.IsValid)
             {
-                return BadRequest(validationResult.msg);
+                return BadRequest(validationResult.Message);
             }
             _personService.Add(person);
             return CreatedAtAction(nameof(GetAllPeople), person);
@@ -49,7 +49,7 @@ namespace ASPNETCoreAPI_day2.Controllers
             ValidationResult validationResult = _validationPersonService.ValidationPerson(person);
             if (!validationResult.IsValid)
             {
-                return BadRequest(validationResult.msg);
+                return BadRequest(validationResult.Message);
             }
             _personService.Update(id, person);
             return CreatedAtAction(nameof(GetAllPeople), person);
