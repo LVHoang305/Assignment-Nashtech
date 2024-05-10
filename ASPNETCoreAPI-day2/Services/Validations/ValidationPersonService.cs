@@ -36,7 +36,7 @@ namespace ASPNETCoreAPI_day2.Services
                 _result.Message = _result.Message + "Invalid DateOfBirth. ";
                 _result.IsValid = false;
             }
-            return Result;
+            return _result;
         }
     }
 }
