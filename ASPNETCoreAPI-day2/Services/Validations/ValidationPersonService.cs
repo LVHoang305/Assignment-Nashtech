@@ -4,10 +4,10 @@ namespace ASPNETCoreAPI_day2.Services
 {
     public class ValidationPersonService: IValidationPersonService
     {
-        private static ValidationResult Result;
+        private static ValidationResult _result;
         public ValidationPersonService() 
         {
-            Result = new ValidationResult();   
+            _result = new ValidationResult();   
         }
         
         public ValidationResult ValidationPerson(ViewPerson person)
@@ -16,29 +16,29 @@ namespace ASPNETCoreAPI_day2.Services
 
             if (string.IsNullOrEmpty(person.FirstName))
             {
-                Result.Message = Result.Message + "Invalid FirstName. ";
-                Result.IsValid = false;
+                _result.Message = _result.Message + "Invalid FirstName. ";
+                _result.IsValid = false;
             }
             if (string.IsNullOrEmpty(person.LastName))
             {
-                Result.Message = Result.Message + "Invalid LastName. ";
-                Result.IsValid = false;
+                _result.Message = _result.Message + "Invalid LastName. ";
+                _result.IsValid = false;
             }
             if (string.IsNullOrEmpty(person.Gender))
             {
-                Result.Message = Result.Message + "Invalid Gender. ";
-                Result.IsValid = false;
+                _result.Message = _result.Message + "Invalid Gender. ";
+                _result.IsValid = false;
             }
             if (string.IsNullOrEmpty(person.BirthPlace))
             {
-                Result.Message = Result.Message + "Invalid BirthPlace. ";
-                Result.IsValid = false;
+                _result.Message = _result.Message + "Invalid BirthPlace. ";
+                _result.IsValid = false;
             }
 
             if (!DateTime.TryParse(person.DateOfBirth, out date))
             {
-                Result.Message = Result.Message + "Invalid DateOfBirth. ";
-                Result.IsValid = false;
+                _result.Message = _result.Message + "Invalid DateOfBirth. ";
+                _result.IsValid = false;
             }
             return Result;
         }
