@@ -17,6 +17,7 @@ public class Program
         builder.Services.AddScoped<IProjectEmployeeService, ProjectEmployeesService>();
         builder.Services.AddScoped<IProjectsService, ProjectsService>();
         builder.Services.AddScoped<ISalariesService, SalariesService>();
+        
         // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
         builder.Services.AddEndpointsApiExplorer();
         builder.Services.AddSwaggerGen();
