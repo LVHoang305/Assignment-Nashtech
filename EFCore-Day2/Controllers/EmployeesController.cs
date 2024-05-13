@@ -4,7 +4,7 @@ using EFCore.Models;
 using EFCore.Services;
 using Microsoft.EntityFrameworkCore;
 
-namespace EFCore_Day1.Controllers
+namespace EFCore.Controllers
 {
     [Route("api/employees")]
     [ApiController]
