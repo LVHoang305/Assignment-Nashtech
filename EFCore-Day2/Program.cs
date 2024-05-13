@@ -13,6 +13,10 @@ public class Program
         builder.Services.AddControllers();
         builder.Services.AddScoped<IValidationService, ValidationService>();
         builder.Services.AddScoped<IEmployeesService, EmployeesService>();
+        builder.Services.AddScoped<IEmployeesService, EmployeesService>();
+        builder.Services.AddScoped<IProjectEmployeeService, ProjectEmployeesService>();
+        builder.Services.AddScoped<IProjectsService, ProjectsService>();
+        builder.Services.AddScoped<ISalariesService, SalariesService>();
         // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
         builder.Services.AddEndpointsApiExplorer();
         builder.Services.AddSwaggerGen();
