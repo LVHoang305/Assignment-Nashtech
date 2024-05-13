@@ -21,7 +21,7 @@ namespace EFCore.Services
         /// <returns></returns>
         public async Task<ActionResult<IEnumerable<Project_Employee>>> GetProjectEmployee()
         {
-            return  await _context.ProjectEmployees.Include(x => x.Employee).ToListAsync();
+            return  await _context.ProjectEmployees.Include(x => x.Employee).Include(y => y.Project).ToListAsync();
         }
 
         /// <summary>
