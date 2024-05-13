@@ -22,7 +22,7 @@ namespace EFCore.Services
         /// <returns></returns>
         public async Task<ActionResult<IEnumerable<Departments>>> GetDepartments()
         {
-            return  await _context.Departments.ToListAsync();
+            return  await _context.Departments.Include(x => x.Employees).ToListAsync();
         }
 
         /// <summary>
