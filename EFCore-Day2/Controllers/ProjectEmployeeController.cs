@@ -3,7 +3,7 @@ using EFCore.Data;
 using EFCore.Models;
 using EFCore.Services;
 
-namespace EFCore_Day1.Controllers
+namespace EFCore.Controllers
 {
     [Route("api/projectemployee")]
     [ApiController]
