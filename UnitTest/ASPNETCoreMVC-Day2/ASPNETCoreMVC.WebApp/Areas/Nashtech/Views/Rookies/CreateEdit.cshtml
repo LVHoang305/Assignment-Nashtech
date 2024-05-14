@@ -1,0 +1,49 @@
+﻿@{ Layout = "~/Views/Shared/_Layout.cshtml"; }
+@model ASPNETCoreMVC.Models.Person
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+
+<h1>@(Model.Id == 0 ? "Create" : "Edit") Person</h1>
+<h1>@Model.Id</h1>
+
+<form asp-action="SavePerson" asp-controller="Rookies" asp-area="Nashtech">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <input type="hidden" asp-for="Id" />
+    <div class="form-group">
+        <label asp-for="FirstName" class="control-label" value="@Model.FirstName"></label>
+        <input asp-for="FirstName" class="form-control" />
+        <span asp-validation-for="FirstName" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="LastName" class="control-label" value="@Model.LastName"></label>
+        <input asp-for="LastName" class="form-control" />
+        <span asp-validation-for="LastName" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Gender">Gender</label>
+        <select class="form-control" asp-for="Gender" value="@Model.Gender">
+            <option value="Male" selected="@((Model.Gender == "Male") ? "selected" : null)">Male</option>
+            <option value="Female" selected="@((Model.Gender == "Female") ? "selected" : null)">Female</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label asp-for="DateOfBirth">Date of Birth</label>
+        <input type="date" class="form-control" asp-for="DateOfBirth" value="@Model.DateOfBirth.ToString("yyyy-MM-dd")">
+        <span asp-validation-for="DateOfBirth" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="PhoneNumber">Phone Number</label>
+        <input type="text" class="form-control" asp-for="PhoneNumber" value="@Model.PhoneNumber">
+        <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="BirthPlace">Birth Place</label>
+        <input type="text" class="form-control" asp-for="BirthPlace" value="@Model.BirthPlace">
+        <span asp-validation-for="BirthPlace" class="text-danger"></span>
+    </div>
+    <div class="form-group form-check">
+        <input type="checkbox" class="form-check-input" id="IsGraduated" name="IsGraduated" @(Model.IsGraduated ? "checked" : "")>
+        <label class="form-check-label" asp-for="IsGraduated">Is Graduated</label>
+    </div>
+    <button type="submit" class="btn btn-primary">Save</button>
+    </form>

@@ -1,0 +1,44 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+
+    <IsPackable>false</IsPackable>
+    <IsTestProject>true</IsTestProject>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="coverlet.collector" Version="6.0.0" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.8.0" />
+    <PackageReference Include="NUnit" Version="3.14.0" />
+    <PackageReference Include="NUnit.Analyzers" Version="3.9.0" />
+    <PackageReference Include="NUnit3TestAdapter" Version="4.5.0" />
+    <PackageReference Include="Moq" Version="4.20.70" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Using Include="NUnit.Framework" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ASPNETCoreMVC-Day2\ASPNETCoreMVC.WebApp\ASPNETCoreMVC.WebApp.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="ASPNETCoreMVC.WebApp\" />
+    <None Remove="ASPNETCoreMVC.WebApp\Areas\" />
+    <None Remove="ASPNETCoreMVC.WebApp\Areas\Nashtech\" />
+    <None Remove="ASPNETCoreMVC.WebApp\Areas\Nashtech\Controllers\" />
+    <None Remove="ASPNETCoreMVC.Services\" />
+    <None Remove="ASPNETCoreMVC.Services\Person\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="ASPNETCoreMVC.WebApp\" />
+    <Folder Include="ASPNETCoreMVC.WebApp\Areas\" />
+    <Folder Include="ASPNETCoreMVC.WebApp\Areas\Nashtech\" />
+    <Folder Include="ASPNETCoreMVC.WebApp\Areas\Nashtech\Controllers\" />
+    <Folder Include="ASPNETCoreMVC.Services\" />
+    <Folder Include="ASPNETCoreMVC.Services\Person\" />
+  </ItemGroup>
+</Project>

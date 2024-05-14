@@ -1,0 +1,20 @@
+﻿@{ Layout = "~/Views/Shared/_Layout.cshtml"; }
+@model ASPNETCoreMVC.Models.Person
+
+@{
+    ViewData["Title"] = "Member - ";
+}
+<h1>Person Details</h1>
+<div>
+    <p><strong>ID:</strong> @Model.Id</p>
+    <p><strong>Name:</strong> @Model.FirstName @Model.LastName</p>
+    <p><strong>Gender:</strong> @Model.Gender</p>
+    <p><strong>Date of Birth:</strong> @Model.DateOfBirth.ToShortDateString()</p>
+    <p><strong>Phone Number:</strong> @Model.PhoneNumber</p>
+    <p><strong>Birth Place:</strong> @Model.BirthPlace</p>
+    <p><strong>IsGraduated:</strong> @Model.IsGraduated</p>
+</div>
+
+<form action="/Nashtech/Rookies/Delete?id=@Model.Id" method="post">
+    <button type="submit" class="btn btn-danger">Delete</button>
+</form>
