@@ -1,6 +1,9 @@
 using NUnit.Framework;
 using Moq;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Http.Features;
+using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using ASPNETCoreMVC.WebApp.Areas.Nashtech.Controllers;
 using ASPNETCoreMVC.Services;
 using ASPNETCoreMVC.Models;
@@ -26,7 +29,21 @@ namespace ASPNETCoreMVCTest
         public void SetUp()
         {
             _mockPersonService = new Mock<IPersonService>();
-            _controller = new RookiesController(_mockPersonService.Object);
+
+            var httpContext = new DefaultHttpContext();
+            var response = new Mock<HttpResponse>();
+            httpContext.Response.Body = new MemoryStream();
+            response.Setup(x => x.Headers).Returns(new HeaderDictionary());
+            httpContext.Features.Set<IHttpResponseFeature>(new HttpResponseFeature()
+            {
+                Headers = new HeaderDictionary()
+            });
+            var tempData = new TempDataDictionary(new DefaultHttpContext(), Mock.Of<ITempDataProvider>());
+            _controller = new RookiesController(_mockPersonService.Object)
+            {
+                TempData = tempData,
+                ControllerContext = new ControllerContext { HttpContext = httpContext}
+            };
         }
 
         [Test]
@@ -202,6 +219,7 @@ namespace ASPNETCoreMVCTest
         {
             // Arrange
             var person = new Person { Id = 1, FirstName = "John", LastName = "Doe" };
+            //_mockController.Setup(p => p.TempData["Message"]).Returns(_controller.TempData["Message"]);
             _mockPersonService.Setup(service => service.GetPersonById(1)).Returns(person);
             _mockPersonService.Setup(service => service.Delete(1));
 
@@ -212,6 +230,8 @@ namespace ASPNETCoreMVCTest
             var redirectResult = result as RedirectToActionResult;
             Assert.IsNotNull(redirectResult);
             Assert.That(redirectResult.ActionName, Is.EqualTo("Confirmation"));
+
+            Assert.IsTrue(_controller.TempData.ContainsKey("Message"));
             Assert.That($"Person {person.FirstName} {person.LastName} was removed from the list successfully!", Is.EqualTo(_controller.TempData["Message"]));
 
             _mockPersonService.Verify(service => service.Delete(1), Times.Once);
@@ -349,15 +369,15 @@ namespace ASPNETCoreMVCTest
                 Assert.That(worksheet.Cells[2, 1].Value, Is.EqualTo("Hoang"));
                 Assert.That(worksheet.Cells[2, 2].Value, Is.EqualTo("Le"));
                 Assert.That(worksheet.Cells[2, 3].Value, Is.EqualTo("Male"));
-                Assert.That(worksheet.Cells[2, 4].Value, Is.EqualTo(new DateTime(2002, 1, 1)));
+                Assert.That(worksheet.Cells[2, 4].Value, Is.EqualTo(new DateTime(2002, 1, 1).ToString()));
                 Assert.That(worksheet.Cells[2, 5].Value, Is.EqualTo("123456789"));
                 Assert.That(worksheet.Cells[2, 6].Value, Is.EqualTo("Ha Noi"));
                 Assert.That(worksheet.Cells[2, 7].Value, Is.EqualTo(true));
 
-                Assert.That(worksheet.Cells[3, 1].Value, Is.EqualTo("Giang"));
-                Assert.That(worksheet.Cells[3, 2].Value, Is.EqualTo("Le"));
+                Assert.That(worksheet.Cells[3, 1].Value, Is.EqualTo("Chau"));
+                Assert.That(worksheet.Cells[3, 2].Value, Is.EqualTo("Nguyen"));
                 Assert.That(worksheet.Cells[3, 3].Value, Is.EqualTo("Female"));
-                Assert.That(worksheet.Cells[3, 4].Value, Is.EqualTo(new DateTime(2003, 5, 5)));
+                Assert.That(worksheet.Cells[3, 4].Value, Is.EqualTo(new DateTime(2003, 5, 5).ToString()));
                 Assert.That(worksheet.Cells[3, 5].Value, Is.EqualTo("987654321"));
                 Assert.That(worksheet.Cells[3, 6].Value, Is.EqualTo("Ha Noi"));
                 Assert.That(worksheet.Cells[3, 7].Value, Is.EqualTo(false));
