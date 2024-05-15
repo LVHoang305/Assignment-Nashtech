@@ -29,7 +29,7 @@ namespace ASPNETCoreMVC.Services
                 worksheet.Cells[lastRow, 2].Value = person.FirstName;
                 worksheet.Cells[lastRow, 3].Value = person.LastName;
                 worksheet.Cells[lastRow, 4].Value = person.Gender;
-                worksheet.Cells[lastRow, 5].Value = person.DateOfBirth;
+                worksheet.Cells[lastRow, 5].Value = person.DateOfBirth.ToString();
                 worksheet.Cells[lastRow, 6].Value = person.PhoneNumber;
                 worksheet.Cells[lastRow, 7].Value = person.BirthPlace;
                 worksheet.Cells[lastRow, 8].Value = person.IsGraduated;
