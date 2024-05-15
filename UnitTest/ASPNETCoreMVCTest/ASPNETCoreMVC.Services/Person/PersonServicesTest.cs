@@ -1,10 +1,11 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using ASPNETCoreMVC.Models;
 using ASPNETCoreMVC.Services;
 using NUnit.Framework;
+using NUnit.Framework.Internal.Execution;
 using OfficeOpenXml;
 
 namespace YourProjectName.Tests.Services
@@ -19,7 +20,7 @@ namespace YourProjectName.Tests.Services
         public void Setup()
         {
             _testFilePath = Path.Combine(TestContext.CurrentContext.TestDirectory, "TestPersons.xlsx");
-            File.Copy("Users/tuanbeo/Projects/UnitTest/ASPNETCoreMVC-Day2/ASPNetCoreMVC.Models/Persons.xlsx", _testFilePath, true);
+            File.Copy("/Users/tuanbeo/Projects/UnitTest/ASPNETCoreMVC-Day2/ASPNetCoreMVC.Models/Persons.xlsx", _testFilePath, true);
             _personService = new PersonService(_testFilePath);
         }
 
@@ -38,7 +39,7 @@ namespace YourProjectName.Tests.Services
                 FirstName = "Test",
                 LastName = "Person",
                 Gender = "Male",
-                DateOfBirth = new DateTime(2002, 1, 1),
+                DateOfBirth = Convert.ToDateTime("05/05/2002"),
                 PhoneNumber = "123456789",
                 BirthPlace = "RandomPlace",
                 IsGraduated = true
@@ -48,7 +49,7 @@ namespace YourProjectName.Tests.Services
             _personService.Create(person);
 
             // Assert
-            var createdPerson = GetPersonFromExcel(person.FirstName, person.LastName);
+            var createdPerson = GetPersonFromExcel(6);
             Assert.IsNotNull(createdPerson);
             Assert.That(createdPerson.FirstName, Is.EqualTo(person.FirstName));
             Assert.That(createdPerson.LastName, Is.EqualTo(person.LastName));
@@ -140,7 +141,7 @@ namespace YourProjectName.Tests.Services
             // Assert
             Assert.IsNotNull(people);
             Assert.IsInstanceOf<List<Person>>(people);
-            Assert.That(people.Count, Is.EqualTo(2));
+            Assert.That(people.Count, Is.EqualTo(5));
         }
 
         private Person GetPersonFromExcel(int id)
@@ -171,15 +172,17 @@ namespace YourProjectName.Tests.Services
             return null;
         }
 
-        private Person GetPersonFromExcel(string firstName, string lastName)
+        public Person GetPersonById(int id)
         {
+            ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
+
             using (var package = new ExcelPackage(new FileInfo(_testFilePath)))
             {
                 ExcelWorksheet worksheet = package.Workbook.Worksheets["Persons"];
 
                 for (int row = 2; row <= worksheet.Dimension.End.Row; row++)
                 {
-                    if (worksheet.Cells[row, 2].Value.ToString() == firstName && worksheet.Cells[row, 3].Value.ToString() == lastName)
+                    if (worksheet.Cells[row, 1].Value.ToString() == id.ToString())
                     {
                         return new Person
                         {
