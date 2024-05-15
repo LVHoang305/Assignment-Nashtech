@@ -167,7 +167,7 @@ namespace ASPNETCoreMVC.WebApp.Areas.Nashtech.Controllers
                     worksheet.Cells[row, 1].Value = person.FirstName;
                     worksheet.Cells[row, 2].Value = person.LastName;
                     worksheet.Cells[row, 3].Value = person.Gender;
-                    worksheet.Cells[row, 4].Value = person.DateOfBirth;
+                    worksheet.Cells[row, 4].Value = person.DateOfBirth.ToString();
                     worksheet.Cells[row, 5].Value = person.PhoneNumber;
                     worksheet.Cells[row, 6].Value = person.BirthPlace;
                     worksheet.Cells[row, 7].Value = person.IsGraduated;
