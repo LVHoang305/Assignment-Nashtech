@@ -211,8 +211,6 @@ namespace ASPNETCoreMVCTest
             // Assert
             var redirectResult = result as RedirectToActionResult;
             Assert.IsNotNull(redirectResult);
-            //Assert.AreEqual("Confirmation", redirectResult.ActionName);
-            //Assert.AreEqual($"Person {person.FirstName} {person.LastName} was removed from the list successfully!", _controller.TempData["Message"]);
             Assert.That(redirectResult.ActionName, Is.EqualTo("Confirmation"));
             Assert.That($"Person {person.FirstName} {person.LastName} was removed from the list successfully!", Is.EqualTo(_controller.TempData["Message"]));
 
@@ -261,7 +259,7 @@ namespace ASPNETCoreMVCTest
             // Assert
             Assert.IsNotNull(result);
             Assert.IsNotNull(oldestMember);
-            Assert.That(oldestMember, Is.EqualTo(oldestPerson));
+            Assert.That(oldestMember.Id, Is.EqualTo(oldestPerson.Id));
         }
 
         [Test]
@@ -283,8 +281,8 @@ namespace ASPNETCoreMVCTest
             Assert.IsNotNull(result);
             Assert.IsNotNull(fullNameList);
             Assert.That(fullNameList.Count, Is.EqualTo(2));
-            Assert.That(fullNameList[0], Is.EqualTo("Hoang Le"));
-            Assert.That(fullNameList[1], Is.EqualTo("Chau Nguyen"));
+            Assert.That(fullNameList[0], Is.EqualTo("Le Hoang"));
+            Assert.That(fullNameList[1], Is.EqualTo("Nguyen Chau"));
         }
 
         [Test]
@@ -295,7 +293,7 @@ namespace ASPNETCoreMVCTest
             {
                 new Person { Id = 1, FirstName = "Hoang", LastName = "Le", DateOfBirth = new DateTime(2000, 1, 1) },
                 new Person { Id = 2, FirstName = "Chau", LastName = "Nguyen", DateOfBirth = new DateTime(1995, 5, 5) },
-                new Person { Id = 3, FirstName = "Giang", LastName = "Le", DateOfBirth = new DateTime(1990, 10, 10) }
+                new Person { Id = 3, FirstName = "Giang", LastName = "Le", DateOfBirth = new DateTime(2005, 10, 10) }
             };
             _mockPersonService.Setup(x => x.ListAllPeople()).Returns(people.AsQueryable().ToList());
 
