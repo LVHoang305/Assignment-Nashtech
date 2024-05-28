@@ -3,13 +3,14 @@ import { NavLink } from "react-router-dom";
 import { useAuthContext } from "../context/authContext";
 
 const nav = [
-  { name: "Home", path: "/home" },
+  { name: "Home", path: "/" },
   { name: "Posts", path: "/posts" },
+  { name: "Books", path: "/books" },
   { name: "Profile", path: "/profile" },
 ];
 
 function Navbar() {
-  const {isAuthenticated, setIsAuthenticated} = useAuthContext();
+  const { isAuthenticated, setIsAuthenticated } = useAuthContext();
 
   const handleLogout = () => {
     localStorage.removeItem("token");
